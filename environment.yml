@@ -1,0 +1,35 @@
+name: cxr
+
+channels:
+  - defaults
+  - conda-forge
+  - pytorch
+  - nvidia
+
+dependencies:
+  - python=3.11
+  - pip
+  - numpy
+  - pandas
+  - scipy
+  - tqdm
+  - scikit-learn
+  - matplotlib
+  # - pytorch
+  # - torchvision
+  # - torchaudio
+  - pytorch-cuda
+  - pytorch-lightning
+  - tensorboard
+  - triton
+  - gxx_linux-64
+  - pip:
+    - torchxrayvision
+    - openpyxl
+    - scikit-image
+    - torchxrayvision
+    - opencv-python
+    - cxas
+    - albumentations
+    - tableone
+    - pingouin
