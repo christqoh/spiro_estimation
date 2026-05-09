@@ -2,7 +2,7 @@ import pandas as pd
 
 from evaluation.table_supp_62_performance_time import evaluate_performance_by_time
 from evaluation.table_4_performance_pathology import evaluate_performance_by_pathology
-from evaluation.table_performance_site import evaluate_performance_by_site, evaluate_performance_by_site_cutoff
+from evaluation.table_supp_61_performance_site import evaluate_performance_by_site_cutoff
 
 
 def generate_performance_tables(run_evaluated: str, data_src, path, df_tbs: pd.DataFrame, n_iter: int = 1000):
@@ -80,9 +80,6 @@ def generate_performance_tables(run_evaluated: str, data_src, path, df_tbs: pd.D
     df.loc[df.loc[:, 'lobar_volume_loss'] == True, 'lobar_volume_loss'] = 'Loss of Lobar Volume: True'
     df.loc[df.loc[:, 'lobar_volume_loss'] == False, 'lobar_volume_loss'] = 'Loss of Lobar Volume: False'
 
-    certainty = data_src.get(run_evaluated).get('certainty')
-    certainty_0 = certainty.get('0.0')
-
     evaluate_performance_by_pathology(df.copy(), path, run=run_evaluated, n_iter=n_iter)
 
     evaluate_performance_by_time(df.copy(), path, n_iter=n_iter, prob_threshold=0.0, z_score_tolerance=0.0)
@@ -92,7 +89,6 @@ def generate_performance_tables(run_evaluated: str, data_src, path, df_tbs: pd.D
     evaluate_performance_by_time(df.copy(), path, n_iter=n_iter, prob_threshold=0.6, z_score_tolerance=0.2)
     evaluate_performance_by_time(df.copy(), path, n_iter=n_iter, prob_threshold=0.7, z_score_tolerance=0.2)
 
-    evaluate_performance_by_site(df.copy(), path, run=run_evaluated, n_iter=n_iter)
     evaluate_performance_by_site_cutoff(df.copy(), path, run=run_evaluated, n_iter=n_iter, prob_threshold=0.0, z_score_tolerance=0.0)
     evaluate_performance_by_site_cutoff(df.copy(), path, run=run_evaluated, n_iter=n_iter, prob_threshold=0.7, z_score_tolerance=0.1)
     evaluate_performance_by_site_cutoff(df.copy(), path, run=run_evaluated, n_iter=n_iter, prob_threshold=0.8, z_score_tolerance=0.1)
